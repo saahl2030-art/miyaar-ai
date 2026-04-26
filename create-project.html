@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>معيار AI | إنشاء مشروع</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #f4f7fb;
+      color: #1f2937;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      gap: 15px;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #0f766e;
+    }
+
+    .lang-btn {
+      border: none;
+      background: #0f766e;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+    }
+
+    .subtitle {
+      color: #6b7280;
+      margin-bottom: 30px;
+      line-height: 1.7;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    select,
+    input,
+    textarea {
+      width: 100%;
+      padding: 13px;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      font-size: 16px;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    .extras {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .extra-box {
+      border: 1px solid #d1d5db;
+      padding: 12px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      background: #f9fafb;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .price-box {
+      margin-top: 30px;
+      background: #ecfdf5;
+      border: 1px solid #99f6e4;
+      border-radius: 14px;
+      padding: 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .price {
+      font-size: 32px;
+      font-weight: bold;
+      color: #0f766e;
+    }
+
+    .btn {
+      width: 100%;
+      margin-top: 25px;
+      background: #0f766e;
+      color: white;
+      border: none;
+      padding: 16px;
+      font-size: 18px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .note {
+      margin-top: 15px;
+      color: #6b7280;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 700px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+
+      .price-box {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="card">
+
+      <div class="top">
+        <div class="logo" id="logo">معيار AI</div>
+        <button class="lang-btn" onclick="toggleLang()" id="langBtn">English</button>
+      </div>
+
+      <h1 id="title">أنشئ مشروعك الدراسي بسهولة</h1>
+      <p class="subtitle" id="subtitle">
+        اختر نوع الخدمة، أضف التفاصيل، وسيظهر السعر مباشرة قبل الدفع.
+      </p>
+
+      <div class="grid">
+
+        <div>
+          <label id="serviceLabel">نوع الخدمة</label>
+          <select id="service" onchange="calculatePrice()">
+            <option value="10">تلخيص ملف - 10 درهم</option>
+            <option value="10">إعادة صياغة - 10 درهم</option>
+            <option value="25">تقرير قصير - 25 درهم</option>
+            <option value="55">بحث متوسط - 55 درهم</option>
+            <option value="250">بحث كامل + مراجع - 250 درهم</option>
+            <option value="250">عرض تقديمي - 250 درهم</option>
+            <option value="180">بروشور / ملصق - 180 درهم</option>
+            <option value="350">مشروع تخرج كامل - 350 درهم</option>
+          </select>
+        </div>
+
+        <div>
+          <label id="pagesLabel">عدد الصفحات / الشرائح التقريبي</label>
+          <input type="number" id="pages" min="1" value="1" oninput="calculatePrice()" />
+        </div>
+
+        <div>
+          <label id="projectLangLabel">لغة المشروع</label>
+          <select id="projectLang">
+            <option>العربية</option>
+            <option>English</option>
+            <option>العربية + English</option>
+          </select>
+        </div>
+
+        <div>
+          <label id="levelLabel">المستوى الدراسي</label>
+          <select id="level">
+            <option>ثانوي</option>
+            <option>دبلوم</option>
+            <option>بكالوريوس</option>
+            <option>ماجستير</option>
+          </select>
+        </div>
+
+        <div class="full">
+          <label id="extrasLabel">إضافات اختيارية</label>
+          <div class="extras">
+            <label class="extra-box">
+              <input type="checkbox" value="15" onchange="calculatePrice()" />
+              <span id="fastText">تسليم سريع +15</span>
+            </label>
+
+            <label class="extra-box">
+              <input type="checkbox" value="20" onchange="calculatePrice()" />
+              <span id="refsText">مراجع أكاديمية +20</span>
+            </label>
+
+            <label class="extra-box">
+              <input type="checkbox" value="25" onchange="calculatePrice()" />
+              <span id="proText">مستوى احترافي +25</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="full">
+          <label id="detailsLabel">تفاصيل المشروع</label>
+          <textarea id="details" placeholder="اكتب عنوان المشروع، المطلوب، أي ملاحظات خاصة..."></textarea>
+        </div>
+
+      </div>
+
+      <div class="price-box">
+        <div>
+          <strong id="totalLabel">السعر الإجمالي</strong>
+          <div class="note" id="priceNote">السعر قابل للتعديل لاحقًا من لوحة الإدارة.</div>
+        </div>
+        <div class="price" id="price">10 درهم</div>
+      </div>
+
+      <button class="btn" onclick="submitProject()" id="payBtn">ادفع الآن</button>
+
+      <p class="note" id="bottomNote">
+        هذه نسخة أولية. لاحقًا سيتم ربط الطلب بقاعدة البيانات والدفع والذكاء الاصطناعي.
+      </p>
+
+    </div>
+  </div>
+
+  <script>
+    let currentLang = "ar";
+
+    function calculatePrice() {
+      const servicePrice = Number(document.getElementById("service").value);
+      const extras = document.querySelectorAll('.extra-box input:checked');
+
+      let total = servicePrice;
+
+      extras.forEach(item => {
+        total += Number(item.value);
+      });
+
+      document.getElementById("price").innerText =
+        currentLang === "ar" ? total + " درهم" : total + " AED";
+    }
+
+    function toggleLang() {
+      if (currentLang === "ar") {
+        currentLang = "en";
+        document.documentElement.lang = "en";
+        document.documentElement.dir = "ltr";
+
+        document.getElementById("logo").innerText = "Miyaar AI";
+        document.getElementById("langBtn").innerText = "عربي";
+        document.getElementById("title").innerText = "Create Your Academic Project Easily";
+        document.getElementById("subtitle").innerText = "Choose the service, add your details, and see the price instantly before payment.";
+
+        document.getElementById("serviceLabel").innerText = "Service Type";
+        document.getElementById("pagesLabel").innerText = "Estimated Pages / Slides";
+        document.getElementById("projectLangLabel").innerText = "Project Language";
+        document.getElementById("levelLabel").innerText = "Academic Level";
+        document.getElementById("extrasLabel").innerText = "Optional Extras";
+        document.getElementById("detailsLabel").innerText = "Project Details";
+
+        document.getElementById("fastText").innerText = "Fast Delivery +15";
+        document.getElementById("refsText").innerText = "Academic References +20";
+        document.getElementById("proText").innerText = "Professional Level +25";
+
+        document.getElementById("totalLabel").innerText = "Total Price";
+        document.getElementById("priceNote").innerText = "Prices can be modified later from the admin panel.";
+        document.getElementById("payBtn").innerText = "Pay Now";
+        document.getElementById("bottomNote").innerText = "This is an initial version. Later, it will be connected to database, payment, and AI tools.";
+        document.getElementById("details").placeholder = "Write the project title, requirements, and any special notes...";
+
+      } else {
+        currentLang = "ar";
+        document.documentElement.lang = "ar";
+        document.documentElement.dir = "rtl";
+
+        document.getElementById("logo").innerText = "معيار AI";
+        document.getElementById("langBtn").innerText = "English";
+        document.getElementById("title").innerText = "أنشئ مشروعك الدراسي بسهولة";
+        document.getElementById("subtitle").innerText = "اختر نوع الخدمة، أضف التفاصيل، وسيظهر السعر مباشرة قبل الدفع.";
+
+        document.getElementById("serviceLabel").innerText = "نوع الخدمة";
+        document.getElementById("pagesLabel").innerText = "عدد الصفحات / الشرائح التقريبي";
+        document.getElementById("projectLangLabel").innerText = "لغة المشروع";
+        document.getElementById("levelLabel").innerText = "المستوى الدراسي";
+        document.getElementById("extrasLabel").innerText = "إضافات اختيارية";
+        document.getElementById("detailsLabel").innerText = "تفاصيل المشروع";
+
+        document.getElementById("fastText").innerText = "تسليم سريع +15";
+        document.getElementById("refsText").innerText = "مراجع أكاديمية +20";
+        document.getElementById("proText").innerText = "مستوى احترافي +25";
+
+        document.getElementById("totalLabel").innerText = "السعر الإجمالي";
+        document.getElementById("priceNote").innerText = "السعر قابل للتعديل لاحقًا من لوحة الإدارة.";
+        document.getElementById("payBtn").innerText = "ادفع الآن";
+        document.getElementById("bottomNote").innerText = "هذه نسخة أولية. لاحقًا سيتم ربط الطلب بقاعدة البيانات والدفع والذكاء الاصطناعي.";
+        document.getElementById("details").placeholder = "اكتب عنوان المشروع، المطلوب، أي ملاحظات خاصة...";
+      }
+
+      calculatePrice();
+    }
+
+    function submitProject() {
+      alert(currentLang === "ar"
+        ? "تم تجهيز الطلب. الخطوة القادمة: ربطه بقاعدة البيانات والدفع."
+        : "Project prepared. Next step: connect it to database and payment."
+      );
+    }
+
+    calculatePrice();
+  </script>
+
+</body>
+</html>
