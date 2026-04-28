@@ -1,88 +1,213 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>معيار</title>
-
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
   <style>
-    body { font-family: system-ui; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #eef3f8;
+      color: #1f2937;
+    }
+
+    .wrap {
+      max-width: 1050px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 35px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 35px;
+    }
+
+    h1 {
+      margin: 0;
+      color: #0f766e;
+      font-size: 34px;
+    }
+
+    .lang {
+      background: #0f766e;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+
+    h2 {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .sub {
+      color: #6b7280;
+      margin-bottom: 30px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    select, input, textarea {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      min-height: 130px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    .priceBox {
+      background: #ecfdf5;
+      border: 1px solid #99f6e4;
+      padding: 22px;
+      border-radius: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .price {
+      font-size: 34px;
+      font-weight: bold;
+      color: #0f766e;
+    }
+
+    button.main {
+      width: 100%;
+      background: #0f766e;
+      color: white;
+      border: none;
+      padding: 17px;
+      font-size: 18px;
+      border-radius: 14px;
+      margin-top: 25px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @media (max-width: 700px) {
+      .grid { grid-template-columns: 1fr; }
+      h2 { font-size: 24px; }
+    }
   </style>
 </head>
 
-<body class="bg-gray-50">
+<body>
 
-<div class="max-w-3xl mx-auto mt-10 p-4">
+<div class="wrap">
+  <div class="card">
 
-  <div class="bg-white rounded-2xl shadow-lg p-6">
-
-    <!-- Header -->
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-bold text-gray-800">معيار</h1>
-      <button onclick="toggleLang()" class="bg-teal-600 text-white px-4 py-2 rounded-lg">
-        English
-      </button>
+    <div class="header">
+      <h1>معيار</h1>
+      <button class="lang">English</button>
     </div>
 
-    <h2 class="text-xl font-semibold mb-2">أنشئ مشروعك الدراسي بسهولة</h2>
-    <p class="text-gray-500 mb-6">اكتب طلبك وسيتم تجهيز كل شيء لك</p>
+    <h2>أنجز مشروعك الدراسي من طلب واحد</h2>
+    <p class="sub">اختر الخدمة، اكتب التفاصيل، وسيظهر السعر مباشرة حسب نوع المشروع.</p>
 
-    <!-- Service -->
-    <label class="font-medium">نوع الخدمة</label>
-    <select id="service" onchange="calc()" class="w-full p-3 border rounded-lg mb-4">
-      <option value="10">تلخيص - 10</option>
-      <option value="25">تقرير - 25</option>
-      <option value="55">بحث متوسط - 55</option>
-      <option value="120">بحث كامل - 120</option>
-      <option value="60">عرض تقديمي - 60</option>
-    </select>
+    <div class="grid">
 
-    <!-- Pages -->
-    <label class="font-medium">عدد الصفحات</label>
-    <input type="number" id="pages" value="1" oninput="calc()" 
-      class="w-full p-3 border rounded-lg mb-4" />
+      <div>
+        <label>نوع الخدمة</label>
+        <select id="service" onchange="calc()">
+          <option value="50">تلخيص ملف - 50 درهم</option>
+          <option value="50">إعادة صياغة - 50 درهم</option>
+          <option value="80">تقرير قصير - 80 درهم</option>
+          <option value="120">بحث متوسط - 120 درهم</option>
+          <option value="250">بحث كامل + مراجع - 250 درهم</option>
+          <option value="250">عرض تقديمي - 250 درهم</option>
+          <option value="180">بروشور / ملصق - 180 درهم</option>
+          <option value="350">مشروع تخرج كامل - 350 درهم</option>
+        </select>
+      </div>
 
-    <!-- Details -->
-    <label class="font-medium">تفاصيل المشروع</label>
-    <textarea id="details"
-      class="w-full p-3 border rounded-lg mb-4"
-      placeholder="اكتب طلبك هنا..."></textarea>
+      <div>
+        <label>المستوى الدراسي</label>
+        <select>
+          <option>مدرسة</option>
+          <option>كلية</option>
+          <option>جامعة</option>
+          <option>مشروع تخرج</option>
+        </select>
+      </div>
 
-    <!-- Price -->
-    <div class="bg-teal-50 border border-teal-200 rounded-xl p-4 flex justify-between items-center mb-4">
-      <span class="text-gray-600">السعر الإجمالي</span>
-      <span id="price" class="text-xl font-bold text-teal-700">10 درهم</span>
+      <div>
+        <label>لغة المشروع</label>
+        <select>
+          <option>العربية</option>
+          <option>English</option>
+          <option>العربية + English</option>
+        </select>
+      </div>
+
+      <div>
+        <label>موعد التسليم</label>
+        <select>
+          <option>عادي</option>
+          <option>مستعجل</option>
+        </select>
+      </div>
+
+      <div class="full">
+        <label>تفاصيل المشروع</label>
+        <textarea placeholder="مثال: أريد بحث عن الطاقة الشمسية مع عرض تقديمي وصور تعليمية..."></textarea>
+      </div>
+
     </div>
 
-    <!-- Button -->
-    <button onclick="submitProject()" 
-      class="w-full bg-teal-600 hover:bg-teal-700 text-white py-3 rounded-xl font-bold">
+    <div class="priceBox">
+      <div>
+        <strong>السعر الإجمالي</strong>
+        <p class="sub" style="margin:5px 0 0;">السعر حسب نوع الخدمة ويمكن تعديله لاحقًا.</p>
+      </div>
+      <div id="price" class="price">50 درهم</div>
+    </div>
+
+    <button class="main" onclick="alert('الخطوة القادمة: ربط الطلب بواتساب أو قاعدة بيانات')">
       إنشاء المشروع
     </button>
 
   </div>
-
 </div>
 
 <script>
-function calc(){
-  let base = Number(document.getElementById("service").value);
-  let pages = Number(document.getElementById("pages").value);
-  let total = base + (pages * 2);
-  document.getElementById("price").innerText = total + " درهم";
+function calc() {
+  const service = document.getElementById("service");
+  const price = service.value;
+  document.getElementById("price").innerText = price + " درهم";
 }
-
-function submitProject(){
-  alert("الخطوة القادمة: ربط الذكاء الاصطناعي");
-}
-
-function toggleLang(){
-  alert("سيتم إضافة الإنجليزية لاحقاً");
-}
-
 calc();
 </script>
 
