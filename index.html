@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>معيار AI</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #f5f7fb;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    select, input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      background: #0f766e;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .price {
+      margin-top: 20px;
+      font-size: 24px;
+      color: green;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>معيار AI</h1>
+  <p>أنشئ مشروعك الدراسي بسهولة</p>
+
+  <label>نوع الخدمة</label>
+  <select id="service" onchange="calc()">
+    <option value="10">تلخيص - 10</option>
+    <option value="25">تقرير - 25</option>
+    <option value="55">بحث متوسط - 55</option>
+    <option value="120">بحث كامل - 120</option>
+    <option value="60">عرض تقديمي - 60</option>
+  </select>
+
+  <label>عدد الصفحات</label>
+  <input type="number" id="pages" value="1" oninput="calc()" />
+
+  <label>تفاصيل المشروع</label>
+  <textarea id="details"></textarea>
+
+  <div class="price" id="price">10 درهم</div>
+
+  <button onclick="submitProject()">الدفع الآن</button>
+
+</div>
+
+<script>
+function calc(){
+  let base = Number(document.getElementById("service").value);
+  let pages = Number(document.getElementById("pages").value);
+  let total = base + (pages * 2);
+  document.getElementById("price").innerText = total + " درهم";
+}
+
+function submitProject(){
+  alert("تم تسجيل الطلب (مؤقت)");
+}
+
+calc();
+</script>
+
+</body>
+</html>
